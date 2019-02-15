@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import Menu from './menu';
-import Navbar from './layout/navbar'
-import Footer from './layout/footer'
+import CuisineItem from './cuisineItem';
 
-class Cuisine extends Component {
+
+class Cuisine extends React.Component {
     constructor(props){
         super(props)
         this.state = {
@@ -18,7 +17,8 @@ class Cuisine extends Component {
         // this.handleEdit = this.handleEdit.bind(this);
     }
     componentDidMount() {
-        axios.get('http://localhost:3000/cuisines').then((response) => {
+        let name = this.props.match.params.name
+        axios.get(`http://localhost:3000/restaurants/${name}/cuisines`).then((response) => {
         this.setState({ cuisines:response.data,isLoaded: true }) 
         }).catch((err) => {
         console.log(err)
@@ -29,12 +29,12 @@ class Cuisine extends Component {
         return (
             <div>
                 <ul className="collection-item">
-                    { this.state.cuisines.map((cuisine,index) => <li key={index}> <Link to={`/cuisines/${cuisine._id}`} item={cuisine}>{cuisine.name}</Link> 
-                    {/* <button onClick={this.handleDelete} data-id={cuisine._id} > Delete </button><button onClick={this.handleEdit} data-id={cuisine._id} > Edit </button>  */}
-                    </li>)}     
-                    {/* <Route path="/cuisines/:id/menus" component={this.ChildCuisine.bind(this)}/>    */}
-                </ul>
-                
+                <CuisineItem items={this.state.cuisines}/>
+                    {/* { this.state.cuisines.map((cuisine,index) => <li key={index}> <Link to={`/cuisines/${cuisine._id}`} item={cuisine}>{cuisine.name}</Link>  */}
+                 
+                    {/* </li>)}      */}
+                    
+                </ul> 
             </div>
         )
     }
@@ -42,7 +42,6 @@ class Cuisine extends Component {
         return (
             <div>
                 <h1>Cuisines</h1>
-                {/* <Navbar /> */}
                 {this.state.isLoaded ? this.cuisinesList() : <img src="https://loading.io/spinners/spinner/index.ajax-spinner-preloader.gif" alt="loading" />}             
                 {/* <div className="fixed-action-btn">
                 <Link to="/cuisines/add" className="btn-floating-btn-large red"></Link>

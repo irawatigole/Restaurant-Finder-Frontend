@@ -2,18 +2,14 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from'axios'
 
-class CuisineDetails extends Component {
+class CuisineDetails extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            // item: props.item
             details: ''
         }
     }
-    // componentWillMount(){
-    //     this.getCuisine()
-    // }
-    // getCuisine(){
+    
         componentDidMount(){
         let cuisineId = this.props.match.params.id;
         axios.get(`http://localhost:3000/cuisines/${cuisineId}`).then(response => {
@@ -24,11 +20,10 @@ class CuisineDetails extends Component {
             console.log(err);
         })
     }
-    // }
+    
     onDelete() {     
         let cuisineId = this.state.details._id;
-        axios.delete(`http://localhost:3000/cuisines/${cuisineId}`).then(response => {
-            this.props.history.push('/cuisines')     
+        axios.delete(`http://localhost:3000/cuisines/${cuisineId}`).then(response => {  
         }).catch(err => {
             console.log(err)
         })
@@ -37,13 +32,14 @@ class CuisineDetails extends Component {
         return(
            <div>
                <br/>
-               <Link to="/cuisines">Back</Link>
-               <h1>{this.state.details.name}</h1>
+               <Link to="/restaurants">Back</Link>
+               
                <ul>
-                   <li><Link to={`/cuisines/${this.state.details._id}/menus`}>Name: {this.state.details.name} </Link></li>       
+                   <li><Link to={`/cuisines/${this.state.details._id}/menus`}>Name: {this.state.details.name} </Link></li>  
+                   <Link to={`/cuisines/edit/${this.state.details._id}`}>Edit</Link>
+               <button onClick={this.onDelete.bind(this)}>Delete</button>     
                </ul>
-               <Link to={`/cuisines/edit/${this.state.details._id}`}>Edit</Link>
-               <button onClick={this.onDelete.bind(this)}>Delete</button>
+               
            </div>
         )
     }

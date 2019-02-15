@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from'axios';
 
 
-class AddMenu extends Component {
+class AddMenu extends React.Component {
     addCuisine(newMenu) {
         axios.post('http://localhost:3000/menus', newMenu).then(response  => {
             this.props.history.push('/menus')

@@ -23,7 +23,7 @@ class Navbar extends Component {
                         style={{ width: '25px', marginRight: '5px'}} />
                             Logout
                 </a>
-              <Link className="nav-link" to="/users/cartItems">Cart</Link>
+              <Link className="nav-link" to="/users/cart_items">Cart</Link>
             </ul>
         )
       const guestLinks = (

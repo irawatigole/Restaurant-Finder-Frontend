@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from'axios';
 
 
-class EditCuisine extends Component {
+class EditCuisine extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -54,7 +54,7 @@ class EditCuisine extends Component {
            <div>
                <br/>
                <Link to="/cuisines">Back</Link>
-               <h1>Edit Meeetup</h1>
+               <h1>Edit Cuisine</h1>
                <form onSubmit={this.onSubmit.bind(this)}>
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" ref="name" value={this.state.name} onChange={this.handleInputChange}/>             

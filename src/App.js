@@ -20,11 +20,12 @@ import EditCuisine from './components/editCuisine';
 import Menu from './components/menu';
 import Register from './components/auth/register';
 import Login from './components/auth/login';
-import Home from './components/home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddMenu from './components/addMenu';
-import AddCart from './components/addCart';
-
+import CartDisplay from './components/cartDisplay';
+import OrderDetails from './components/orderDetails';
+import Restaurant from './components/restaurant';
+import RestaurantDetails from './components/restaurantDetails';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -54,45 +55,45 @@ const App = () => (
         <Navbar />
         <Route exact path="/" component={Landing} />
         <div className="container">
-            <Route exact path='/users/register' component={Register} /> 
-             <Route exact path='/users/login' component={Login} />
-
-         <Route exact path='/cuisines/:id/menus' component={Menu}/> 
-         <Switch>
-             <Route exact path='/cuisines' component={Cuisine}/> 
-             </Switch>
-             <Switch>    
-             <Route exact path='/cuisines/add' component={AddCuisine} />
-             </Switch>
-             <Switch>    
-
-
-             <Route exact path='/cuisines/edit/:id' component={EditCuisine} />
-             </Switch> 
-             <Switch>    
-
-             <Route exact path='/cuisines/:id' component={CuisineDetails} />
-             </Switch>
-             <Switch>    
-
-             <Route exact path='/menus' component={Menu} />
-             </Switch> 
-             <Switch>    
-
-             <Route exact path='/menus/add' component={AddMenu} />
-             </Switch>
-             <Switch>    
-
-             <Route exact path='/users/cart_items' component={AddCart} />
-             </Switch>  
+                <Route exact path='/users/register' component={Register} /> 
+                <Route exact path='/users/login' component={Login} />
+                <Route exact path='/restaurants' component={Restaurant}/>
+                <Switch>
+                     <Route exact path='/cuisines/:id/menus' component={Menu}/> 
+                </Switch>
+                <Switch>
+                     <Route exact path='/restaurants/:name' component={RestaurantDetails}/> 
+                </Switch>
+                <Switch>
+                     <Route exact path='/restaurants/:name/cuisines' component={Cuisine}/> 
+                </Switch>
+                <Switch>    
+                    <Route exact path='/cuisines/add' component={AddCuisine} />
+                </Switch>
+                <Switch>    
+                    <Route exact path='/cuisines/edit/:id' component={EditCuisine} />
+                </Switch> 
+                {/* <Switch>    
+                    <Route exact path='/cuisines/:id' component={CuisineDetails} />
+                </Switch> */}
+                <Switch>    
+                    <Route exact path='/menus' component={Menu} />
+                </Switch> 
+                <Switch>    
+                    <Route exact path='/menus/add' component={AddMenu} />
+                </Switch>
+                <Switch>    
+                    <Route exact path='/users/cart_items' component={CartDisplay} />
+                </Switch> 
+                <Switch>    
+                    <Route exact path='/orders' component={OrderDetails} />
+                </Switch>   
 
          </div>
          <Footer />
          </div>
          </Router>
       </Provider>
-
-    
 
 )
 export default App;
